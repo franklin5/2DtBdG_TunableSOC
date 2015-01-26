@@ -1,4 +1,4 @@
-#LyX 1.6.10 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.6.1 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -36,6 +36,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -62,7 +63,67 @@ today
 \end_layout
 
 \begin_layout Standard
+We follow the recent theory and experiment work of arXiv:1412.4064, to first
+ of all reproduce effective dynamics in fast modulation of Raman field.
+ Then, we attempt to understand the intriguing dynamics of the modulated
+ Fermion system.
+\end_layout
 
+\begin_layout Standard
+Following Eq.
+ (1), we perform a pseudo-spin rotation first: 
+\begin_inset Formula $\sigma_{x}\rightarrow\sigma_{z}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{z}\rightarrow\sigma_{x}$
+\end_inset
+
+, which will be helpful to do inverse adiabatic approximation, see arXiv:0708.357
+0.
+ Then, we write down the time-dependent Hamiltonian as
+\begin_inset Formula \begin{equation}
+H(t)=\frac{k_{x}^{2}+k_{y}^{2}}{2}+h(t)\sigma_{z}+\alpha_{0}k_{x}\sigma_{x}\end{equation}
+
+\end_inset
+
+where we have used recoil unit by setting 
+\begin_inset Formula $q_{r}=\hbar=m=1$
+\end_inset
+
+ and we don't consider in-plane Zeeman field effect in this work by setting
+ original 
+\begin_inset Formula $\delta_{0}=0$
+\end_inset
+
+.
+ We write 
+\begin_inset Formula $h(t)=\frac{1}{2}\left(\Omega_{0}+\Omega_{1}\cos\omega t\right)$
+\end_inset
+
+.
+ From single particle EOM, 
+\begin_inset Formula $i\frac{\partial}{\partial t}\left(\begin{array}{c}
+a_{1}\\
+a_{2}\end{array}\right)=H(t)\left(\begin{array}{c}
+a_{1}\\
+a_{2}\end{array}\right)$
+\end_inset
+
+, we make ansartz 
+\begin_inset Formula \begin{eqnarray*}
+a_{1}(t) & = & e^{-i\frac{\Omega_{1}}{2\omega}\sin\omega t}c_{1}(t)\\
+a_{2}(t) & = & e^{+i\frac{\Omega_{1}}{2\omega}\sin\omega t}c_{2}(t)\end{eqnarray*}
+
+\end_inset
+
+ and substitute it into the EOM and obtain,
+\begin_inset Formula \begin{equation}
+i\end{equation}
+
+\end_inset
+
+ 
 \end_layout
 
 \end_body
