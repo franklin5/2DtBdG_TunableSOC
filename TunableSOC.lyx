@@ -119,12 +119,82 @@ a_{2}(t) & = & e^{+i\frac{\Omega_{1}}{2\omega}\sin\omega t}c_{2}(t)\end{eqnarray
 
  and substitute it into the EOM and obtain,
 \begin_inset Formula \begin{eqnarray}
-i\frac{\partial c_{1}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(t)+\alpha_{0}k_{x}e^{i\frac{\Omega_{1}}{\omega}\sin\omega t}c_{2}(t)\\
-i\frac{\partial c_{2}(t)}{\partial t} & =\end{eqnarray}
+i\frac{\partial c_{1}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(t)+\alpha_{0}k_{x}e^{i\frac{\Omega_{1}}{\omega}\sin\omega t}c_{2}(t)\nonumber \\
+i\frac{\partial c_{2}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(t)+\alpha_{0}k_{x}e^{-i\frac{\Omega_{1}}{\omega}\sin\omega t}c_{1}(t)\end{eqnarray}
 
 \end_inset
 
+Following arXiv:0708.3570, we note in the limit 
+\begin_inset Formula $\omega\gg\Omega_{1}$
+\end_inset
+
+, the above coupled equations are integrated approximately for a short period
  
+\begin_inset Formula $2\pi/\omega$
+\end_inset
+
+ by assuming 
+\begin_inset Formula $c_{1}(t)$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}(t)$
+\end_inset
+
+ are constant, since the rapidly oscillating terms are separated ou as the
+ phase factors.
+ This is the inverse adiabatic approximation.
+ We obtain, 
+\begin_inset Formula \begin{eqnarray}
+i\frac{d}{d\tau}c_{1}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{2}(t)\nonumber \\
+i\frac{d}{d\tau}c_{2}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{1}(t)\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a coarse-grained time by the unit of 
+\begin_inset Formula $2\pi/\omega$
+\end_inset
+
+, and 
+\begin_inset Formula $J_{0}(\frac{\Omega_{1}}{\omega})$
+\end_inset
+
+ is the zeroth order Bessel function:
+\begin_inset Formula \[
+J_{0}(\frac{\Omega_{1}}{\omega})=\frac{\omega}{2\pi}\int_{0}^{2\pi/\omega}e^{i\frac{\Omega_{1}}{\omega}\sin\omega u}du\]
+
+\end_inset
+
+or it also follows from that 
+\begin_inset Formula $J_{0}(\frac{\Omega_{1}}{\omega})=\frac{\omega}{2\pi}\int_{0}^{2\pi/\omega}e^{-i\frac{\Omega_{1}}{\omega}\sin\omega u}du$
+\end_inset
+
+, which can be readily proved from integral transformations after a few
+ steps.
+\end_layout
+
+\begin_layout Standard
+Therefore, we obtain the renormalized parameters 
+\begin_inset Formula $\alpha_{0}\rightarrow\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})$
+\end_inset
+
+ ( which is 
+\begin_inset Formula $\le\alpha_{0}$
+\end_inset
+
+ for any positive ratio of 
+\begin_inset Formula $\Omega_{1}/\omega$
+\end_inset
+
+ ) in the fast modulation limit 
+\begin_inset Formula $\omega\gg\Omega_{1}$
+\end_inset
+
+.
 \end_layout
 
 \end_body
