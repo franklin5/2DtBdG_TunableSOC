@@ -83,7 +83,7 @@ Following Eq.
 0.
  Then, we write down the time-dependent Hamiltonian as
 \begin_inset Formula \begin{equation}
-H(t)=\frac{k_{x}^{2}+k_{y}^{2}}{2}+h(t)\sigma_{z}+\alpha_{0}k_{x}\sigma_{x}\end{equation}
+H(t)=\frac{k_{x}^{2}+k_{y}^{2}}{2}+h(t)\sigma_{z}+\alpha_{0}k_{x}\sigma_{x}\label{eq:Horig}\end{equation}
 
 \end_inset
 
@@ -195,6 +195,38 @@ Therefore, we obtain the renormalized parameters
 \end_inset
 
 .
+ Equivalently, we write the time-independent renormalized Hamiltonian as,
+\begin_inset Formula \begin{equation}
+\mathcal{H}_{\text{eff}}=\frac{k_{x}^{2}+k_{y}^{2}}{2}+h_{\text{eff}}\sigma_{z}+\alpha k_{x}\sigma_{x}\label{eq:Heff}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $h_{\text{eff}}=\frac{\Omega_{0}}{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha=J_{0}(\frac{\Omega_{1}}{\omega})\alpha_{0}$
+\end_inset
+
+ by comparing Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Heff"
+
+\end_inset
+
+ and Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Horig"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_body
