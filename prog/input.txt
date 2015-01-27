@@ -1,12 +1,13 @@
-_hi	0.9
-_omega	0.1
+_hi	0.5
+Omega1  0.5
+_omega	50
 
 _Eb	0.2
 _v	1.2
 
-_NK	2000
+_NK	1000
 _kc	5
 
 dt	0.001
-time	150
+time	100
 

@@ -33,6 +33,8 @@ void ctBdG :: input(){
       _mu = dummyM;
 
       fscanf(input,"%s %lf", dummyname, &dummyvalue);
+      _Omega1 = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _Omega1 << endl;
+      fscanf(input,"%s %lf", dummyname, &dummyvalue);
       _omega = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _omega << endl;
       fscanf(input,"%s %lf", dummyname, &dummyvalue);
       _Eb = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _Eb << endl;
@@ -126,7 +128,7 @@ void ctBdG::tuning(){
 /*		string filename = "hi_" + to_string(_hi) + "hf_" + to_string(_hf) + ".dat"; // --> This is only available for c++11 feature...
 		delta_output.open(filename.c_str());*/
 		char filename[50];
-		sprintf(filename,"hi_%gomega_%g.dat",_hi,_omega); // Use the shortest representation %g
+		sprintf(filename,"hi_%gOmega1_%gomega_%g.dat",_hi,_Omega1,_omega); // Use the shortest representation %g
 		delta_output.open(filename);delta_output.is_open();
 //		akx.open("akx.OUT");akx.is_open();
 //		aky.open("aky.OUT");aky.is_open();
@@ -150,7 +152,7 @@ void ctBdG::tuning(){
 	}
 	double ht;
 	for (int nt = 1; nt < int(_total_t/_dt); ++nt) {
-		ht = _hi*cos(_omega*nt*_dt);
+		ht = _hi+_Omega1/2*cos(_omega*nt*_dt);
 		compute_DeltaK(localDelta, ht);
 		// gather or reduce to rank 0 to update \Delta(t) value
 //		MPI_Reduce(&localDelta, &_delta, 1, MPI_C_DOUBLE_COMPLEX, MPI_SUM, _root, MPI_COMM_WORLD);

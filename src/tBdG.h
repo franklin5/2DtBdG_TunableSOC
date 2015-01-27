@@ -13,7 +13,7 @@
 #include "dist.h"
 class ctBdG: public cDistribute{
 private:
-    double _Eb, _hi, _omega, _v, _mu, _dt, _total_t;
+  double _Eb, _hi, _omega, _v, _mu, _dt, _total_t, _Omega1;
     complex<double> _delta;
     int _NK, _NK2;
     double _kc, _Ueff;
