@@ -12,16 +12,38 @@
 % plot(h, Delta, 'r', h, Mu, '--', h, Eg, 'k','linewidth',2)
 % xlabel('h/E_F')
 % legend('\Delta','\mu','E_g')
-%%
+%% Artifact bug: difference in null quench at t=dt. when dt->0, the bug is gone.
+%(0.6621147649485886,0)
+%(0.6396046674142885,-0.008351946232544946)
 clear
 %close all
- idata = 1;
-% Omega1=0.5;omega=50;besselj(0,Omega1/omega)*1.2
+ idata = 8;
+% 
+Omega1=0.5;omega=50;besselj(0,Omega1/omega)*1.2
+% 0.5532056086826694
+Omega1=0.5;omega=10;besselj(0,Omega1/omega)*1.2
+% 0.5530341614556746
+Omega1=0.5;omega=5;besselj(0,Omega1/omega)*1.2
+% 0.5525006458956896
+Omega1=0.5;omega=2;besselj(0,Omega1/omega)*1.2
+% 0.5488615656462038
+Omega1=0.5;omega=1;besselj(0,Omega1/omega)*1.2
+% 0.5371926921601495
+Omega1=0.5;omega=0.5;besselj(0,Omega1/omega)*1.2
+% 0.505885932881813
+Omega1=0.5;omega=0.1;besselj(0,Omega1/omega)*1.2
+% 0.07909928736239571
 filename = {
     'hi_0.5Omega1_0.5omega_50.dat',...
     'hi_0.5Omega1_0.5omega_10.dat',...
     'hi_0.5Omega1_0.5omega_5.dat',...
     'hi_0.5Omega1_0.5omega_2.dat',...
+    'hi_0.5Omega1_0.5omega_1.dat',...
+    'hi_0.5Omega1_0.5omega_0.5.dat',...
+    'hi_0.5Omega1_0.5omega_0.1.dat',...
+    'hi_0.5Omega1_0omega_0.1.dat',...
+    'hi_0Omega1_0omega_50.dat',...
+    'hi_0.5Omega1_0omega_50.dat',...
     'hi_0.1omega_0.2.dat',...
     'hi_0.9omega_10.5.dat',...
     'hi_0.9omega_8.dat',...
@@ -35,10 +57,11 @@ filename = {
      'hi_0.9omega_0.1.dat',...
      'hi_0.9omega_0.05.dat'};
 %for idata = 1:length(filename)
+for idata = 1:5
 data = load(filename{idata});
 figure(idata)
 t = data(:,1);
 Delta = data(:,2) + 1i* data(:,3);
 ht = data(:,4);
 plot(t,abs(Delta),'r')%,t,ht,'b')
-%end
+end
