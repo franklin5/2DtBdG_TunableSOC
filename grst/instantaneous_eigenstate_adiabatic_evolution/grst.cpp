@@ -31,6 +31,7 @@ void cGRST :: compute(){
 	  cSeek_Gap_Number GapNumber(delta0, mu0 ,para,gauss);
 	  GapNumber.gapnumber();
 	  GapNumber.getresult(delta0, mu0, Eg);
+	  cout << nt*dt << endl;
 	  /*	  cout.precision(16);
 	  cout << "Zeeman = " << Zeeman << endl;
 	  cout << "Delta = " << delta0 << endl;
