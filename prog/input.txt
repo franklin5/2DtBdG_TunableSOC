@@ -1,6 +1,6 @@
 _hi	0.5
 Omega1  0.5
-_omega	10
+_omega	0.1
 
 _Eb	0.2
 _v	1.2

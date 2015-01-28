@@ -20,7 +20,9 @@ void ctBdG :: input(){
       if (ig == _root)  cout << "Starting to read in parameters from file input.txt" << endl;
       fscanf(input,"%s %lf", dummyname, &dummyvalue);
       _hi = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _hi << endl;
-      
+      fscanf(input,"%s %lf", dummyname, &dummyvalue);
+      _Omega1 = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _Omega1 << endl;
+
       FILE *sf_input;
       sf_input = fopen ("superfluid.dat","r"); // Zeeman, Delta, Mu, Eg
       double dummyH, dummyD, dummyM, dummyE;
@@ -33,8 +35,6 @@ void ctBdG :: input(){
       _N0 = 0.0; _N1 = 0.0;
       _mu = dummyM;
 
-      fscanf(input,"%s %lf", dummyname, &dummyvalue);
-      _Omega1 = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _Omega1 << endl;
       fscanf(input,"%s %lf", dummyname, &dummyvalue);
       _omega = dummyvalue;    if (ig == _root) cout << dummyname << "=" << _omega << endl;
       fscanf(input,"%s %lf", dummyname, &dummyvalue);

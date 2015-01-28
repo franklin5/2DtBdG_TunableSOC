@@ -85,5 +85,5 @@ title(['h_{eff}=0.5,\alpha_0=1.2,E_b=0.2,\Omega_1 = ',num2str(Omega1), ...
     ', \Delta_{grst}=',num2str(DeltaGRST(idata))])
 set(gca,'fontsize',16)
 legend('|\Delta(t)|','\Delta_{grst}','n_s/n','n_t/n')
-%saveas(figure(idata),['fig',num2str(idata),'.eps'],'epsc')
+saveas(figure(idata),['fig',num2str(idata),'.eps'],'epsc')
 end
