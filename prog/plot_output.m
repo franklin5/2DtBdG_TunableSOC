@@ -33,6 +33,17 @@ Omega1=0.5;omega=0.5;besselj(0,Omega1/omega)*1.2
 % 0.505885932881813
 Omega1=0.5;omega=0.1;besselj(0,Omega1/omega)*1.2
 % 0.07909928736239571
+Omega1 = 0.5;
+omega_grid = [50 10 5 2 1 0.5 0.1];
+DeltaGRST = [
+    0.5532056086826694
+    0.5530341614556746
+    0.5525006458956896
+    0.5488615656462038
+    0.5371926921601495
+    0.505885932881813
+    0.07909928736239571
+    ];
 filename = {
     'hi_0.5Omega1_0.5omega_50.dat',...
     'hi_0.5Omega1_0.5omega_10.dat',...
@@ -57,11 +68,19 @@ filename = {
      'hi_0.9omega_0.1.dat',...
      'hi_0.9omega_0.05.dat'};
 %for idata = 1:length(filename)
-for idata = 1:5
+for idata = 1:7
 data = load(filename{idata});
 figure(idata)
 t = data(:,1);
 Delta = data(:,2) + 1i* data(:,3);
 ht = data(:,4);
-plot(t,abs(Delta),'r')%,t,ht,'b')
+plot(t,abs(Delta),'r',t,DeltaGRST(idata)*ones(1,length(t)),'b')
+xlabel('t/(E_F^{-1})')
+ylabel('|\Delta(t)|/E_F')
+title(['h_{eff}=0.5,\alpha_0=1.2,E_b=0.2,\Omega_1 = ',num2str(Omega1), ...
+    ', \omega = ' , num2str(omega_grid(idata)),...
+    ', \Delta_{grst}=',num2str(DeltaGRST(idata))])
+set(gca,'fontsize',16)
+legend('|\Delta(t)|','\Delta_{grst}')
+saveas(figure(idata),['fig',num2str(idata),'.eps'],'epsc')
 end
