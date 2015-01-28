@@ -74,13 +74,16 @@ figure(idata)
 t = data(:,1);
 Delta = data(:,2) + 1i* data(:,3);
 ht = data(:,4);
-plot(t,abs(Delta),'r',t,DeltaGRST(idata)*ones(1,length(t)),'b')
+N0 = data(:,5);
+N1 = data(:,6);
+plot(t,abs(Delta),'r',t,DeltaGRST(idata)*ones(1,length(t)),'b',...
+    t, N0, 'm',t,N1,'k')
 xlabel('t/(E_F^{-1})')
 ylabel('|\Delta(t)|/E_F')
 title(['h_{eff}=0.5,\alpha_0=1.2,E_b=0.2,\Omega_1 = ',num2str(Omega1), ...
     ', \omega = ' , num2str(omega_grid(idata)),...
     ', \Delta_{grst}=',num2str(DeltaGRST(idata))])
 set(gca,'fontsize',16)
-legend('|\Delta(t)|','\Delta_{grst}')
-saveas(figure(idata),['fig',num2str(idata),'.eps'],'epsc')
+legend('|\Delta(t)|','\Delta_{grst}','n_s/n','n_t/n')
+%saveas(figure(idata),['fig',num2str(idata),'.eps'],'epsc')
 end
