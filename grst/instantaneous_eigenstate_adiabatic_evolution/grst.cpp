@@ -31,14 +31,14 @@ void cGRST :: compute(){
 	  cSeek_Gap_Number GapNumber(delta0, mu0 ,para,gauss);
 	  GapNumber.gapnumber();
 	  GapNumber.getresult(delta0, mu0, Eg);
-	  cout.precision(16);
+	  /*	  cout.precision(16);
 	  cout << "Zeeman = " << Zeeman << endl;
 	  cout << "Delta = " << delta0 << endl;
-	  cout << "Mu = "    << mu0    << endl;
+	  cout << "Mu = "    << mu0    << endl;*/
 	  GapNumber.printEg();
 	  superfluid_output.precision(16);
 	  superfluid_output << Zeeman << '\t' << delta0 << '\t'
-			    << mu0 << '\t' << Eg << endl;
+			    << mu0 << '\t' << Eg << '\t' << nt*dt << endl;
 	  nt += 1;
 	  Zeeman = 0.5+0.5/2*cos(omega*nt*dt);
 	} while(nt*dt < 100);

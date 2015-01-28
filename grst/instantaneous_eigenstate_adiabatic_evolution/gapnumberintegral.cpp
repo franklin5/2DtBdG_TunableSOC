@@ -26,9 +26,9 @@ void cSeek_Gap_Number::gapnumber(){
  		_mu 	   -=  alpha * (-dnd*temp1+dgd*temp2);
  		temp1 = compute(_Delta, _mu,g), temp2 = compute(_Delta, _mu,n);
  		temp = sqrt(pow(temp1,2)+pow(temp2,2));
- 		cout.precision(16);
+		/* 		cout.precision(16);
  		cout << "Delta = " << _Delta << endl;
- 		cout << "mu = " << _mu << endl;
+ 		cout << "mu = " << _mu << endl;*/
  	}
 // 	cout.precision(16);
 // 	cout << "Delta = " << _Delta << endl;
