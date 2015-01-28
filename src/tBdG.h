@@ -15,6 +15,7 @@ class ctBdG: public cDistribute{
 private:
   double _Eb, _hi, _omega, _v, _mu, _dt, _total_t, _Omega1;
     complex<double> _delta;
+    double _N0, _N1;
     int _NK, _NK2;
     double _kc, _Ueff;
     double *_gauss_k, *_gauss_w_k;
@@ -37,7 +38,9 @@ public:
     void input();
     complex<double> DELTA_K(int,int);
     void RK_Propagator(int, int);
-    void compute_DeltaK(complex<double>&, double);
+    void compute_DeltaK(complex<double>&, double&, double&, double);
+    double N0_CF(int, int);
+    double N1_CF(int, int);
     void tuning();
     void Initialize_Euabv();
     void construct_BdG(double, double, double);
