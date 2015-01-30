@@ -6,9 +6,9 @@
  */
 #include "grst.h"
 void cGRST :: compute(){
-  double omega = 0.1;
+  double omega = 0.1, hi = 1.0, Omega1 = 0.6;
   char filename[150];
-  sprintf(filename,"superfluid_instantaneous_state_omega_%gomega.dat",omega);
+  sprintf(filename,"superfluid_instant_hi_%gOmega1_%g_omega_%gomega.dat",hi,Omega1,omega);
 	ofstream superfluid_output;
 	superfluid_output.open(filename);
 	superfluid_output.is_open();
@@ -41,7 +41,7 @@ void cGRST :: compute(){
 	  superfluid_output << Zeeman << '\t' << delta0 << '\t'
 			    << mu0 << '\t' << Eg << '\t' << nt*dt << endl;
 	  nt += 1;
-	  Zeeman = 1.0+0.6/2*cos(omega*nt*dt);
+	  Zeeman = hi+Omega1/2*cos(omega*nt*dt);
 	} while(nt*dt < 100);
 	delete []gauss_k;
 	delete []gauss_w_k;
