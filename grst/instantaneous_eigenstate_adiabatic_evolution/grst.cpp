@@ -6,7 +6,7 @@
  */
 #include "grst.h"
 void cGRST :: compute(){
-  double omega = 0.1, hi = 1.0, Omega1 = 0.6;
+  double omega = 0.1, hi = 0.5, Omega1 = 0.5;
   char filename[150];
   sprintf(filename,"superfluid_instant_hi_%gOmega1_%g_omega_%gomega.dat",hi,Omega1,omega);
 	ofstream superfluid_output;
