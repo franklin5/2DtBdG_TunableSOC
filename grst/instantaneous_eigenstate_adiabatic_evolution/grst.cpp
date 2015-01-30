@@ -20,10 +20,10 @@ void cGRST :: compute(){
 	gauss.N=NK; gauss.kc=kc;
 	gauss.gauss_x = gauss_k;gauss.gauss_w = gauss_w_k;
 	double mu0= 0.05;    double delta0 = 0.05; double Eg;
-	double Zeeman = 1.3, soc = 1.2;
+	double Zeeman, soc = 1.2;
 	int nt = 0;double dt = 0.1;
 	do {
-	
+	  Zeeman = hi+Omega1/2*cos(omega*nt*dt);	
 	  // *********************************** //
 	  // --> input parameters of the system.
 	  sPara para = {0.2, Zeeman, soc};
@@ -41,7 +41,6 @@ void cGRST :: compute(){
 	  superfluid_output << Zeeman << '\t' << delta0 << '\t'
 			    << mu0 << '\t' << Eg << '\t' << nt*dt << endl;
 	  nt += 1;
-	  Zeeman = hi+Omega1/2*cos(omega*nt*dt);
 	} while(nt*dt < 100);
 	delete []gauss_k;
 	delete []gauss_w_k;
