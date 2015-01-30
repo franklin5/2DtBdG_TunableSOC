@@ -28,8 +28,8 @@ void cSeek_Gap_Number::spintexture(){
 
   SelfAdjointEigenSolver<MatrixXd> es;
   es.compute(_bdg);
-  double tmpSz0 = pow(fabs(es.eigenvectors().col(2)[1]),2.0) - pow(fabs(es.eigenvectors().col(2)[0]),2.0);
-  tmpSz0 += pow(fabs(es.eigenvectors().col(3)[3]),2.0) - pow(fabs(es.eigenvectors().col(3)[2]),2.0);
+  double tmpSz0 = pow(fabs(es.eigenvectors().col(2)[0]),2.0) - pow(fabs(es.eigenvectors().col(2)[1]),2.0);
+  tmpSz0 += pow(fabs(es.eigenvectors().col(3)[2]),2.0) - pow(fabs(es.eigenvectors().col(3)[3]),2.0);
   /*for(int i = 0;i<4;++i){
     //    cout << es.eigenvalues()[i] << endl;
     if (es.eigenvalues()[i]>0) {
