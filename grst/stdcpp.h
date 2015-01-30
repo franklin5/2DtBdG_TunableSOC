@@ -17,10 +17,7 @@
 #include <assert.h>
 #include <Eigen/Eigenvalues>
 using namespace std;
-using Eigen::MatrixXd;
-using Eigen::MatrixXcd;
-using Eigen::ComplexEigenSolver;
-using Eigen::VectorXcd;
+using namespace Eigen;
 
 template <typename T> int sgn(T val) {
     return (T(0) < val) - (val < T(0));
