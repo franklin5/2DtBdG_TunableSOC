@@ -44,7 +44,7 @@ public:
     void tuning();
     void Initialize_Euabv();
     void construct_BdG(double, double, double);
-
+    double spintexture(double);
 };
 
 

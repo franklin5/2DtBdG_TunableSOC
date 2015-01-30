@@ -152,7 +152,7 @@ void ctBdG::tuning(){
 		//		delta_output << 0.0 << '\t' << _delta.real() << '\t' << _delta.imag() << '\t' << _hi << endl;
 //		Delta_K_r.precision(16);Delta_K_i.precision(16);
 	}
-	double ht;
+	double ht, sz0;
 	for (int nt = 1; nt < int(_total_t/_dt); ++nt) {
 		ht = _hi+_Omega1/2*cos(_omega*nt*_dt);
 		compute_DeltaK(localDelta, localN0, localN1, ht);
@@ -171,23 +171,52 @@ void ctBdG::tuning(){
 //		MPI_Gatherv(local_Delta_k_i,recvcount, MPI_DOUBLE, total_Delta_k_i,recvcounts,displs_r,MPI_DOUBLE, _root, COMM_WORLD);
 		// rinse and repeat
 		if (_rank == _root) {
+		  sz0 = spintexture(ht);
 //			if (nt%int(0.1/_dt)==0) {
-			if (nt%1000==0) {
-			  cout << _delta << '\t' << 2*_N0*(2*M_PI) << '\t' << 2*_N1*(2*M_PI) << endl;
-			}
-			delta_output << nt*_dt << '\t'
-				     << _delta.real() << '\t' << _delta.imag() << '\t'
-				     << ht << '\t' << 2*_N0*(2*M_PI) << '\t' << 2*_N1*(2*M_PI) << endl;
-			//				 for (int nk = 0; nk < _NK2; ++nk) {
-//					Delta_K_r << total_Delta_k_r[nk] << '\t';
-//					Delta_K_i << total_Delta_k_i[nk] << '\t';
-//				}
-//				Delta_K_r << endl;Delta_K_i << endl;
+		  if (nt%1000==0) {
+		    cout << nt*_dt << '\t' << _delta << '\t' << sz0 << endl;
+		  }
+		  delta_output << nt*_dt << '\t'
+			       << _delta.real() << '\t' << _delta.imag() << '\t'
+			       << ht << '\t' << 2*_N0*(2*M_PI) << '\t' << 2*_N1*(2*M_PI) << '\t' << sz0 << endl;
+		  //				 for (int nk = 0; nk < _NK2; ++nk) {
+		  //					Delta_K_r << total_Delta_k_r[nk] << '\t';
+		  //					Delta_K_i << total_Delta_k_i[nk] << '\t';
+		  //				}
+		  //				Delta_K_r << endl;Delta_K_i << endl;
 //			}
 		}
 	}
-//	Delta_K_r.close();Delta_K_i.close();
+	//	Delta_K_r.close();Delta_K_i.close();
 	delta_output.close();
+}
+
+double  ctBdG::spintexture(double ht){
+  double kx = 0.0, mu = 0.0, xi = kx*kx-mu;
+  Matrix4cd _bdg_H;
+  _bdg_H(0,0) = complex<double> (xi+ht,0.0);
+  _bdg_H(0,1) = complex<double> (_v*kx,0.0);
+  _bdg_H(0,2) = complex<double> (0.0,0.0);
+  _bdg_H(0,3) = -_delta;
+  _bdg_H(1,0) = complex<double> (_v*kx,0.0);
+  _bdg_H(1,1) = complex<double> (xi-ht,0.0);
+  _bdg_H(1,2) = _delta;
+  _bdg_H(1,3) = complex<double> (0.0,0.0);
+  _bdg_H(2,0) = complex<double> (0.0,0.0);
+  _bdg_H(2,1) = conj(_delta); // should have been conjugate of Delta here. Note for the tBdG update!                            
+  _bdg_H(2,2) = complex<double> (-(xi+ht),0.0);
+  _bdg_H(2,3) = complex<double> (_v*kx,0.0);
+  _bdg_H(3,0) = -conj(_delta); // should have been conjugate of Delta here. Note for the tBdG update!                                                           
+  _bdg_H(3,1) = complex<double> (0.0,0.0);
+  _bdg_H(3,2) = complex<double> (_v*kx,0.0);
+  _bdg_H(3,3) = complex<double> (-xi+ht,0.0);
+  
+  SelfAdjointEigenSolver<MatrixXcd> ces;
+  ces.compute(_bdg_H);
+  double tmpSz0 = pow(abs(ces.eigenvectors().col(2)[0]),2.0) - pow(abs(ces.eigenvectors().col(2)[1]),2.0);
+  tmpSz0 += pow(abs(ces.eigenvectors().col(3)[2]),2.0) - pow(abs(ces.eigenvectors().col(3)[3]),2.0);
+  //  cout << tmpSz0 << endl;
+  return tmpSz0; 
 }
 
 
