@@ -215,7 +215,7 @@ double  ctBdG::spintexture(double ht){
   ces.compute(_bdg_H);
   double tmpSz0 = pow(abs(ces.eigenvectors().row(2)[2]),2.0) - pow(abs(ces.eigenvectors().row(3)[2]),2.0);
   tmpSz0 += pow(abs(ces.eigenvectors().row(2)[3]),2.0) - pow(abs(ces.eigenvectors().row(3)[3]),2.0);
-  cout << tmpSz0 << endl;
+  //  cout << tmpSz0 << endl;
   return tmpSz0; 
 }
 
