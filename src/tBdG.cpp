@@ -154,7 +154,7 @@ void ctBdG::tuning(){
 	}
 	double ht, sz0;
 	for (int nt = 1; nt < int(_total_t/_dt); ++nt) {
-		ht = _hi+_Omega1/2*cos(_omega*nt*_dt);
+		ht = _hi+_Omega1/2*sin(_omega*nt*_dt);
 		compute_DeltaK(localDelta, localN0, localN1, ht);
 		// gather or reduce to rank 0 to update \Delta(t) value
 //		MPI_Reduce(&localDelta, &_delta, 1, MPI_C_DOUBLE_COMPLEX, MPI_SUM, _root, MPI_COMM_WORLD);
