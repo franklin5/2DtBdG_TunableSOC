@@ -89,7 +89,7 @@ Following Eq.
 0.
  Then, we write down the time-dependent Hamiltonian as
 \begin_inset Formula \begin{equation}
-H(t)=\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{1}{2}\left(\Omega_{0}+\Omega_{1}\cos\omega t\right)\sigma_{z}+\alpha_{0}k_{x}\sigma_{x}\label{eq:Horig}\end{equation}
+H(t)=\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{1}{2}\left(\Omega_{0}+\Omega_{1}\sin\omega t\right)\sigma_{z}+\alpha_{0}k_{x}\sigma_{x}\label{eq:Horig}\end{equation}
 
 \end_inset
 
@@ -113,15 +113,15 @@ a_{2}\end{array}\right)$
 
 , we make ansartz 
 \begin_inset Formula \begin{eqnarray*}
-a_{1}(t) & = & e^{-i\frac{\Omega_{1}}{2\omega}\sin\omega t}c_{1}(t)\\
-a_{2}(t) & = & e^{+i\frac{\Omega_{1}}{2\omega}\sin\omega t}c_{2}(t)\end{eqnarray*}
+a_{1}(t) & = & e^{-i\frac{\Omega_{1}}{2\omega}\cos\omega t}c_{1}(t)\\
+a_{2}(t) & = & e^{+i\frac{\Omega_{1}}{2\omega}\cos\omega t}c_{2}(t)\end{eqnarray*}
 
 \end_inset
 
  and substitute it into the EOM and obtain,
 \begin_inset Formula \begin{eqnarray}
-i\frac{\partial c_{1}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(t)+\alpha_{0}k_{x}e^{i\frac{\Omega_{1}}{\omega}\sin\omega t}c_{2}(t)\nonumber \\
-i\frac{\partial c_{2}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(t)+\alpha_{0}k_{x}e^{-i\frac{\Omega_{1}}{\omega}\sin\omega t}c_{1}(t)\end{eqnarray}
+i\frac{\partial c_{1}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(t)+\alpha_{0}k_{x}e^{i\frac{\Omega_{1}}{\omega}\cos\omega t}c_{2}(t)\nonumber \\
+i\frac{\partial c_{2}(t)}{\partial t} & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(t)+\alpha_{0}k_{x}e^{-i\frac{\Omega_{1}}{\omega}\cos\omega t}c_{1}(t)\end{eqnarray}
 
 \end_inset
 
@@ -147,8 +147,8 @@ Following arXiv:0708.3570, we note in the limit
  This is the inverse adiabatic approximation.
  We obtain, 
 \begin_inset Formula \begin{eqnarray}
-i\frac{d}{d\tau}c_{1}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{2}(t)\nonumber \\
-i\frac{d}{d\tau}c_{2}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{1}(t)\end{eqnarray}
+i\frac{d}{d\tau}c_{1}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}+\frac{\Omega_{0}}{2}\right)c_{1}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{2}(\tau)\nonumber \\
+i\frac{d}{d\tau}c_{2}(\tau) & = & \left(\frac{k_{x}^{2}+k_{y}^{2}}{2}-\frac{\Omega_{0}}{2}\right)c_{2}(\tau)+\alpha_{0}J_{0}(\frac{\Omega_{1}}{\omega})k_{x}c_{1}(\tau)\end{eqnarray}
 
 \end_inset
 
@@ -164,18 +164,23 @@ where
 \begin_inset Formula $J_{0}(\frac{\Omega_{1}}{\omega})$
 \end_inset
 
- is the zeroth order Bessel function:
+ is the zeroth order Bessel function 
+\begin_inset Formula $J_{0}(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{-ix\sin\tau}d\tau$
+\end_inset
+
+.
+ In more details, 
 \begin_inset Formula \[
-J_{0}(\frac{\Omega_{1}}{\omega})=\frac{\omega}{2\pi}\int_{0}^{2\pi/\omega}e^{i\frac{\Omega_{1}}{\omega}\sin\omega u}du\]
+\frac{\omega}{2\pi}\int_{t}^{t+2\pi/\omega}e^{i\frac{\Omega_{1}}{\omega}\cos\omega t}dt=\frac{1}{2\pi}\int_{t}^{t+2\pi}e^{i\frac{\Omega_{1}}{\omega}\cos u}du=\frac{1}{2\pi}\int_{t+\pi/2}^{t+5\pi/2}e^{-i\frac{\Omega_{1}}{\omega}\sin u}du\overset{\text{long time limit}}{\approx}\frac{1}{2\pi}\int_{\pi/2}^{5\pi/2}e^{-i\frac{\Omega_{1}}{\omega}\sin u}du\overset{\text{Mathematica}}{=}J_{0}(\frac{\Omega_{1}}{\omega})\]
 
 \end_inset
 
-or it also follows from that 
-\begin_inset Formula $J_{0}(\frac{\Omega_{1}}{\omega})=\frac{\omega}{2\pi}\int_{0}^{2\pi/\omega}e^{-i\frac{\Omega_{1}}{\omega}\sin\omega u}du$
+The proof goes the same as 
+\begin_inset Formula $\frac{\omega}{2\pi}\int_{t}^{t+2\pi/\omega}e^{-i\frac{\Omega_{1}}{\omega}\cos\omega t}dt=J_{0}(\frac{\Omega_{1}}{\omega})$
 \end_inset
 
-, which can be readily proved from integral transformations after a few
- steps.
+ term.
+ 
 \end_layout
 
 \begin_layout Standard
