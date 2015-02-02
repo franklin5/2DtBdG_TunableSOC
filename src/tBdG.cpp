@@ -60,7 +60,7 @@ void ctBdG :: input(){
       _gauss_k = new double [_NK];
       _gauss_w_k = new double [_NK];
       gauss_lgwt(_NK,0,_kc,_gauss_k,_gauss_w_k);
-
+      //      for(int i = 0; i< _NK;++i) cout << _gauss_k[i] << endl; // This is just to show k is reversely ordered. 
       myI = complex<double> (0.0,1.0);
     }
   }
@@ -169,9 +169,13 @@ void ctBdG::tuning(){
 		// Gather \Delta(k,t) complex function
 //		MPI_Gatherv(local_Delta_k_r,recvcount, MPI_DOUBLE, total_Delta_k_r,recvcounts,displs_r,MPI_DOUBLE, _root, COMM_WORLD);
 //		MPI_Gatherv(local_Delta_k_i,recvcount, MPI_DOUBLE, total_Delta_k_i,recvcounts,displs_r,MPI_DOUBLE, _root, COMM_WORLD);
-		// rinse and repeat
+		// <-- rinse and repeat
+		if (_rank == _size-1){
+		  sz0 = spintexture();
+		  MPI_Send(&sz0, 1, MPI_DOUBLE, _root, 42, MPI_COMM_WORLD); // obtain Sz(0) in the last rank and send it to root. 42 is just an integer tag (joke).
+		}
 		if (_rank == _root) {
-		  sz0 = spintexture(ht);
+		  MPI_Recv(&sz0, 1, MPI_DOUBLE, _size-1, 42, MPI_COMM_WORLD,MPI_STATUS_IGNORE); // receive the Sz(0) value at root
 //			if (nt%int(0.1/_dt)==0) {
 		  if (nt%1000==0) {
 		    cout << nt*_dt << '\t' << _delta << '\t' << sz0 << endl;
@@ -191,31 +195,17 @@ void ctBdG::tuning(){
 	delta_output.close();
 }
 
-double  ctBdG::spintexture(double ht){
-  double kx = 0.0, mu = 0.0, xi = kx*kx-mu;
-  Matrix4cd _bdg_H;
-  _bdg_H(0,0) = complex<double> (xi+ht,0.0);
-  _bdg_H(0,1) = complex<double> (_v*kx,0.0);
-  _bdg_H(0,2) = complex<double> (0.0,0.0);
-  _bdg_H(0,3) = -_delta;
-  _bdg_H(1,0) = complex<double> (_v*kx,0.0);
-  _bdg_H(1,1) = complex<double> (xi-ht,0.0);
-  _bdg_H(1,2) = _delta;
-  _bdg_H(1,3) = complex<double> (0.0,0.0);
-  _bdg_H(2,0) = complex<double> (0.0,0.0);
-  _bdg_H(2,1) = conj(_delta); // should have been conjugate of Delta here. Note for the tBdG update!                            
-  _bdg_H(2,2) = complex<double> (-(xi+ht),0.0);
-  _bdg_H(2,3) = complex<double> (_v*kx,0.0);
-  _bdg_H(3,0) = -conj(_delta); // should have been conjugate of Delta here. Note for the tBdG update!                                                           
-  _bdg_H(3,1) = complex<double> (0.0,0.0);
-  _bdg_H(3,2) = complex<double> (_v*kx,0.0);
-  _bdg_H(3,3) = complex<double> (-xi+ht,0.0);
-  
-  SelfAdjointEigenSolver<MatrixXcd> ces;
-  ces.compute(_bdg_H);
-  double tmpSz0 = pow(abs(ces.eigenvectors().row(2)[2]),2.0) - pow(abs(ces.eigenvectors().row(3)[2]),2.0);
-  tmpSz0 += pow(abs(ces.eigenvectors().row(2)[3]),2.0) - pow(abs(ces.eigenvectors().row(3)[3]),2.0);
-  //  cout << tmpSz0 << endl;
+double  ctBdG::spintexture(){
+  double tmpSz0 = 0.0;
+  int i = recvcount-1;
+  //  cout << _gauss_k[recvbuf[i]] << endl; // This is to check if we are examing Sz(k=0) at time t within the rank root!
+  // if it is, then we are safe to continue. Otherwise, go figure! 
+  for (int eta = 0; eta < 4; ++eta) { // Only positive two branches are considered, which are defined at t=0. BUGS???
+    if ( sgn(_bdg_E(i,eta))==1){
+    tmpSz0 += pow(abs(_bdg_b(i,eta)),2.0) - pow(abs(_bdg_v(i,eta)),2.0);
+    }
+  }
+  //cout << tmpSz0 << endl;
   return tmpSz0; 
 }
 
