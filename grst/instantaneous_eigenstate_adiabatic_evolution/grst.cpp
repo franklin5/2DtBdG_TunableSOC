@@ -6,7 +6,7 @@
  */
 #include "grst.h"
 void cGRST :: compute(){
-  double omega = 0.1, hi = 0.5, Omega1 = 0.5;
+  double omega = 0.1, hi = 0.4, Omega1 = 0.6;
   char filename[150];
   sprintf(filename,"superfluid_instant_hi_%gOmega1_%g_omega_%gomega.dat",hi,Omega1,omega);
 	ofstream superfluid_output;
@@ -23,7 +23,7 @@ void cGRST :: compute(){
 	double Zeeman, soc = 1.2;
 	int nt = 0;double dt = 0.1;
 	do {
-	  Zeeman = hi+Omega1/2*cos(omega*nt*dt);	
+	  Zeeman = hi+Omega1/2*sin(omega*nt*dt);	
 	  // *********************************** //
 	  // --> input parameters of the system.
 	  sPara para = {0.2, Zeeman, soc};
