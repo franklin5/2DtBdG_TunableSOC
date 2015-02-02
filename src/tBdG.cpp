@@ -27,7 +27,7 @@ void ctBdG :: input(){
       sf_input = fopen ("superfluid.dat","r"); // Zeeman, Delta, Mu, Eg
       double dummyH, dummyD, dummyM, dummyE;
       assert (sf_input != NULL);
-      for (int nsf_input = 0; nsf_input <= int((_hi+_Omega1/2)/0.001); ++nsf_input) {
+      for (int nsf_input = 0; nsf_input <= int(_hi/0.001); ++nsf_input) {
 	fscanf(sf_input, "%lf %lf %lf %lf", &dummyH, &dummyD, &dummyM, &dummyE);
       }
       fclose (sf_input);
@@ -149,8 +149,9 @@ void ctBdG::tuning(){
 //		Delta_K_i.open(filename);Delta_K_i.is_open();
 //		cout.precision(16);
 //		cout << _delta << endl;
-		//		delta_output << 0.0 << '\t' << _delta.real() << '\t' << _delta.imag() << '\t' << _hi << endl;
 //		Delta_K_r.precision(16);Delta_K_i.precision(16);
+//		delta_output << 0.0 << '\t' << _delta.real() << '\t' << _delta.imag() << '\t' << _hi << endl;
+
 	}
 	double ht, sz0;
 	for (int nt = 1; nt < int(_total_t/_dt); ++nt) {
